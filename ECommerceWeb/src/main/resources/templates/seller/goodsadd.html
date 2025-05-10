@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>添加商品</title>
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+  <link th:href="@{/css/base.css}" rel="stylesheet">
+</head>
+<body>
+<h2 class="goodsadd-title" >添加商品</h2>
+<div class="goodsadd-container">
+<form id="goods-form">
+  <div>
+    <label for="name">商品名称:</label>
+    <input type="text" id="name" name="name" required>
+  </div>
+  <div>
+    <label for="price">价格:</label>
+    <input type="number" id="price" name="price" step="0.01" required>
+  </div>
+  <div>
+    <label for="sale">折扣:</label>
+    <input type="number" id="sale" name="sale" step="0.01" min="0" max="1" value="1" required>
+  </div>
+  <div>
+    <label for="goodtype">类别:</label>
+    <select id="goodtype" name="goodtype"  required>
+      <option value="电子数码">电子数码</option>
+      <option value="服装配饰">服装配饰</option>
+      <option value="家居生活">家居生活</option>
+      <option value="食品饮料">食品饮料</option>
+      <option value="文艺作品">文艺作品</option>
+      <option value="工具耗材">工具耗材</option>
+      <option value="其他">其他</option>
+    </select>
+  </div>
+  <div>
+    <label for="description">描述:</label>
+    <input type="text" id="description" name="description"  >
+  </div>
+  <button type="submit" class="button">提交</button>
+  <a href="/seller/warehouse" class="button">返回</a>
+</form>
+
+<script th:src="@{/js/goodsadd.js}"></script>
+</div>
+</body>
+</html>

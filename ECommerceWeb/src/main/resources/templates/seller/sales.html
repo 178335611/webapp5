@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Data</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h1>商品销售趋势</h1>
+<table id="sales-trend-table">
+    <thead>
+    <tr>
+        <th>日期</th>
+        <th>销售数量</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<h1>销售异常</h1>
+<table id="sales-anomalies-table">
+    <thead>
+    <tr>
+        <th>订单 ID</th>
+        <th>商品名称</th>
+        <th>销售数量</th>
+        <th>订单日期</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+    // 获取商品销售趋势
+    async function fetchSalesTrend(goodId) {
+        const response = await fetch(`/api/sales/trend/${goodId}`);
+        const data = await response.json();
+        displaySalesTrend(data);
+    }
+
+    // 获取销售异常
+    async function fetchSalesAnomalies(goodId) {
+        const response = await fetch(`/api/sales/anomalies/${goodId}`);
+        const data = await response.json();
+        displaySalesAnomalies(data);
+    }
+
+    // 展示商品销售趋势
+    function displaySalesTrend(data) {
+        const tableBody = document.querySelector('#sales-trend-table tbody');
+        tableBody.innerHTML = ''; // 清空表格内容
+        for (const [date, quantity] of Object.entries(data)) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                    <td>${date}</td>
+                    <td>${quantity}</td>
+                `;
+            tableBody.appendChild(row);
+        }
+    }
+
+    // 展示销售异常
+    function displaySalesAnomalies(data) {
+        const tableBody = document.querySelector('#sales-anomalies-table tbody');
+        tableBody.innerHTML = ''; // 清空表格内容
+        data.forEach(order => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                    <td>${order.id}</td>
+                    <td>${order.name}</td>
+                    <td>${order.quantity}</td>
+                    <td>${order.orderDate}</td>
+                `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    // 调用后端 API 获取数据
+    document.addEventListener('DOMContentLoaded', () => {
+        const goodId = 101; // 示例商品 ID
+        fetchSalesTrend(goodId);
+        fetchSalesAnomalies(goodId);
+    });
+</script>
+</body>
+</html>

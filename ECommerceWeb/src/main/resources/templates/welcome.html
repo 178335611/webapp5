@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('/css/170.png'); /* 设置背景图片路径 */
+            background-position: left; /* 背景图片居中 */
+            background-repeat: no-repeat; /* 背景图片不重复 */
+            background-blend-mode: multiply;
+            background-size: 20%; /* 背景图片适应容器大小 */
+            background-color: white;
+        }
+        .form-container {
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 100%;
+            height: 120vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: -100px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px; /* 在按钮之间添加间距 */
+            margin-top: 20px; /* 与标题的间距 */
+        }
+        .button-link {
+            padding: 15px 40px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            background-color: darkseagreen;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* 添加过渡效果 */
+        }
+        .button-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2>欢迎来到cys的购物网站！</h2>
+    <p>请选择您的身份进行登录：</p>
+    <div class="button-container">
+        <a href="/user/login" class="button-link">用户登录</a>
+        <a href="/seller/login" class="button-link">商家登录</a>
+        <a href="/manager/login" class="button-link">管理员登录</a>
+    </div>
+</div>
+</body>
+</html>

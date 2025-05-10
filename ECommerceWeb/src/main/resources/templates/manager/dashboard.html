@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            padding: 20px;
+            background: white;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <a href="/manager/manager_center">销售人员管理</a>
+    <a href="/manager/manager_reset">重置密码</a>
+    <a href="/manager/sales-performance">销售业绩查询</a>
+    <a href="/manager/reports">销售统计报表</a>
+    <a href="/manager/dashboard">大数据</a>
+    <a href="/welcome">退出登录</a>
+</div>
+
+<div class="content">
+    <h1>欢迎管理员</h1>
+    <p>请选择一个功能模块。当前为<strong>销售统计报表</strong>功能。</p>
+<h2>商品销售趋势</h2>
+<form id="sales-trend-form">
+    <label for="goodId">商品 ID:</label>
+    <input type="number" id="goodId1" name="goodId" required>
+    <button type="button" onclick="fetchSalesTrend()">获取销售趋势</button>
+</form>
+<table id="sales-trend-table">
+    <thead>
+    <tr>
+        <th>日期</th>
+        <th>销售数量</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<h1>销售异常</h1>
+<form id="sales-anomalies-form">
+    <label for="goodId">商品 ID:</label>
+    <input type="number" id="goodId" name="goodId" required>
+    <button type="button" onclick="fetchSalesAnomalies()">获取销售异常</button>
+</form>
+<table id="sales-anomalies-table">
+    <thead>
+    <tr>
+        <th>订单 ID</th>
+        <th>商品名称</th>
+        <th>销售数量</th>
+        <th>订单日期</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<h1>用户画像</h1>
+<form id="user-profile-form">
+    <label for="userId">用户 ID:</label>
+    <input type="number" id="userId1" name="userId" required>
+    <button type="button" onclick="fetchUserProfile()">获取用户画像</button>
+</form>
+<div id="user-profile"></div>
+
+<h1>用户购买趋势预测</h1>
+<form id="user-purchase-trend-form">
+    <label for="userId">用户 ID:</label>
+    <input type="number" id="userId" name="userId" required>
+    <button type="button" onclick="fetchUserPurchaseTrend()">获取购买趋势预测</button>
+</form>
+<div id="user-purchase-trend"></div>
+</div>
+<script>
+    async function fetchSalesTrend() {
+        const goodId = document.getElementById('goodId1').value;
+        const response = await fetch(`/api/sales/trend/${goodId}`);
+        const data = await response.json();
+        // 检查返回数据是否为空
+        if (Object.keys(data).length === 0) {
+            displaySalesTrend("无");
+        } else {
+            displaySalesTrend(data);
+        }
+    }
+
+    async function fetchSalesAnomalies() {
+        const goodId = document.getElementById('goodId').value;
+        const response = await fetch(`/api/sales/anomalies/${goodId}`);
+        const data = await response.json();
+        // 检查返回数据是否为空
+        if (Object.keys(data).length === 0) {
+            displaySalesAnomalies("无");
+        } else {
+            displaySalesAnomalies(data);
+        }
+
+    }
+
+    async function fetchUserProfile() {
+        const userId = document.getElementById('userId1').value;
+        const response = await fetch(`/api/users/${userId}/profile`);
+        const data = await response.json();
+        // 检查返回数据是否为空
+        if (Object.keys(data).length === 0) {
+            displayUserProfile("无");
+        } else {
+            displayUserProfile(data);
+        }
+
+    }
+
+    async function fetchUserPurchaseTrend() {
+        const userId = document.getElementById('userId').value;
+        const response = await fetch(`/api/users/${userId}/purchase-trend`);
+        const data = await response.json();
+        // 检查返回数据是否为空
+        if (Object.keys(data).length === 0) {
+            displaySalesTrend("无");
+        } else {
+            displayUserPurchaseTrend(data);
+        }
+
+    }
+
+    function displaySalesTrend(data) {
+        const tableBody = document.querySelector('#sales-trend-table tbody');
+        tableBody.innerHTML = ''; // 清空表格内容
+        if (data === "无") {
+            tableBody.innerHTML = '<tr><td colspan="4">无</td></tr>';
+            return;
+        }
+        for (const [date, quantity] of Object.entries(data)) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                    <td>${date}</td>
+                    <td>${quantity}</td>
+                `;
+            tableBody.appendChild(row);
+        }
+    }
+
+    function displaySalesAnomalies(data) {
+        const tableBody = document.querySelector('#sales-anomalies-table tbody');
+        tableBody.innerHTML = ''; // 清空表格内容
+        if (data === "无") {
+            tableBody.innerHTML = '<tr><td colspan="4">无</td></tr>';
+            return;
+        }
+        data.forEach(order => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                    <td>${order.id}</td>
+                    <td>${order.name}</td>
+                    <td>${order.quantity}</td>
+                    <td>${order.orderDate}</td>
+                `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    function displayUserProfile(data) {
+        const userProfileDiv = document.getElementById('user-profile');
+
+        if (data === "无") {
+            userProfileDiv.innerHTML = `<p>无用户画像数据</p>`;
+        } else {
+        userProfileDiv.innerHTML = `
+                <p>地域: ${data.locations}</p>
+                <p>总消费: ${data.totalSpent}</p>
+                <p>主要购买类别: ${data.categoryCounts}</p>
+            `;
+        }
+    }
+
+    function displayUserPurchaseTrend(data) {
+        const userPurchaseTrendDiv = document.getElementById('user-purchase-trend');
+        if (data === "无") {
+            userPurchaseTrendDiv.innerHTML = `<p>无购买趋势预测数据</p>`;
+        }
+        else {
+        userPurchaseTrendDiv.innerHTML = `
+                <p>推荐商品: ${data.recommendedProducts.join(', ')}</p>
+            `;
+        }
+    }
+
+</script>
+</body>
+</html>

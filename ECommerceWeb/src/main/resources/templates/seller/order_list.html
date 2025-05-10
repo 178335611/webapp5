@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>用户订单列表</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .loading {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .custom-button {
+            background-color: #FFC107; /* 金黄色 */
+            color: white;
+            transition: background-color 0.3s ease; /* 添加过渡效果 */
+
+        }
+        .custom-button:hover {
+            background-color: #FFA000; /* 悬停时的金黄色 */
+        }
+        .button-link {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 0 5px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>商家订单列表</h1>
+<a href="/seller/warehouse" class="button-link custom-button ">返回仓库</a>
+<div>
+
+</div>
+<table id="ordersTable">
+    <thead>
+    <tr>
+        <th>订单ID</th>
+<!--        <th>店铺ID</th>-->
+<!--        <th>商品ID</th>-->
+        <th>购买数量</th>
+        <th>商品名称</th>
+        <th>商品类别</th>
+        <th>订单总价</th>
+        <th>订单状态</th>
+        <th>订单日期</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 订单数据将通过 JavaScript 动态插入 -->
+    </tbody>
+</table>
+<div class="loading" id="loadingMessage">加载中...</div>
+
+<script th:src="@{/js/order_list_seller.js}"></script>
+
+</body>
+</html>

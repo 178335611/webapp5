@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>购物网站商品页面</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+</head>
+<body>
+<!-- 导航栏 -->
+<nav class="lk-nav">
+    <div class="w">
+        <div class="lk-nav-left">
+
+        </div>
+        <div class="lk-nav-right" >
+                <ul class="lk-nav-list">
+                    <li><a href="/user/login" style="color:deeppink;">回到登录界面</a></li>
+                </ul>
+
+            <p></p>
+            <p></p>
+            <div class="login-status">
+                <span>未登录</span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- 商品列表 -->
+<section class="lk-main-content">
+    <div class="w">
+        <h2 style="color:deeppink;">商品列表</h2>
+        <div class="lk-goods-list" id="goods-list">
+            <!-- 商品项将通过JavaScript动态插入 -->
+        </div>
+    </div>
+</section>
+
+
+
+<script th:src="@{/js/shoppingMall_noLogin.js}"></script>
+<!--在js前面加个static就不行，删掉就能正常加载了，但没有看到什么不同-->
+</body>
+</html>

@@ -1,0 +1,240 @@
+/* 顶部广告 */
+.lk-top-banner {
+    background-color: #164FA6;
+    height: 10rem;
+}
+.lk-top-banner .top-banner-center {
+    position: relative;
+    height: 10rem;
+}
+.lk-top-banner .banner-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 2rem;
+    height: 2rem;
+    background-size: 100% 100%;
+}
+
+/* 顶部通栏 */
+.lk-toobar {
+    height: 10rem;
+    background-color: #fff;
+}
+.lk-toobar .w {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1280px;
+}
+.lk-toobar .lk-top-toobar {
+    display: flex;
+    list-style: none;
+}
+.lk-toobar .lk-top-toobar li {
+    margin-right: 2rem;
+}
+.lk-toobar .f1-location-pic {
+    width: 1.2rem;
+    height: 1rem;
+    background-size: 100% 100%;
+    margin-right: 0.5rem;
+}
+
+/* 搜索框 */
+.lk-top-search {
+    height: 11rem;
+    background-color: #fff;
+}
+.lk-top-search .lk-search-logo {
+    float: left;
+    margin-right: 3rem;
+}
+.lk-top-search .lk-search-input {
+    float: left;
+    display: flex;
+}
+.lk-top-search .lk-search-input input {
+    width: 45rem;
+    height: 3.8rem;
+    padding: 0 1rem;
+    border: 1px solid #ccc;
+}
+.lk-top-search .lk-search-input button {
+    width: 7rem;
+    height: 3.8rem;
+    background-size: 100% 100%;
+    border: none;
+    cursor: pointer;
+}
+
+/* 导航栏 */
+.lk-nav {
+    height: 4rem;
+    background-color: #fff;
+}
+.lk-nav .w {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1280px;
+}
+.lk-nav .lk-nav-left {
+    position: relative;
+    padding-left: 1rem;
+    box-sizing: border-box;
+    height: 4rem;
+    line-height: 4rem;
+}
+.lk-nav .lk-nav-left::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.2rem;
+    height: 1rem;
+
+    background-size: 100% 100%;
+    margin-right: 0.5rem;
+}
+.lk-nav .lk-nav-right .lk-nav-list {
+    display: flex;
+    list-style: none;
+}
+.lk-nav .lk-nav-right .lk-nav-list li {
+    margin-right: 2rem;
+}
+.lk-nav .lk-nav-right .lk-nav-list li a {
+    color: #666;
+}
+
+/* 轮播图 */
+.lk-rotation {
+    height: 40rem;
+    background-color: #ccc;
+}
+.lk-rotation .lk-rotation-w {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40rem;
+}
+.lk-rotation .lk-rotation-left {
+    width: 15rem;
+    background-color: #eee;
+    height: 40rem;
+}
+.lk-rotation .lk-rotation-center {
+    width: 80rem;
+    background-color: #ddd;
+    height: 40rem;
+}
+.lk-rotation .lk-rotation-right {
+    width: 15rem;
+    background-color: #eee;
+    height: 40rem;
+}
+
+/* 尾部 */
+.lk-footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 2rem 0;
+}
+.lk-footer .lk-footer-links {
+    list-style: none;
+    padding: 1rem 0;
+}
+.lk-footer .lk-footer-links li {
+    display: inline-block;
+    margin-right: 1rem;
+}
+.lk-footer .lk-footer-links li a {
+    color: #fff;
+}
+/* 商品列表样式 */
+.lk-main-content {
+    margin-top: 2rem;
+}
+
+.lk-goods-list {
+    /*display: grid;!* 使用 grid 布局 *!*/
+    /*grid-template-columns: repeat(3, 1fr); !* 每行三个 *!*/
+    display: flex;
+    width: 90rem;
+    flex-wrap: wrap; /* 允许换行 */
+    gap: 2rem;
+
+}
+
+
+.lk-goods-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 1rem;
+    min-width: 15rem;
+}
+
+.lk-goods-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.lk-goods-info {
+    margin-top: 1rem;
+}
+
+.lk-goods-info h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.lk-goods-info p {
+    margin-bottom: 0.5rem;
+    color: #666;
+}
+
+.lk-goods-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.lk-goods-actions a, .lk-goods-actions button {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.lk-goods-actions a:hover, .lk-goods-actions button:hover {
+    background-color: #0056b3;
+}
+
+.goodsadd-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+.goodsadd-title {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 10rem;
+}
+.orderadd-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+.orderadd-title {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 10rem;
+}

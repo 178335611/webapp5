@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: ECommerceWeb
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled=true:
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/store
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+
+
+

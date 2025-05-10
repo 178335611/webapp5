@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理员主页</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            padding: 20px;
+            background: white;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        .form-container input, .form-container button {
+            padding: 10px;
+            margin: 5px;
+        }
+        .form-container button {
+            background-color: darkseagreen;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <a href="/manager/manager_center">销售人员管理</a>
+    <a href="/manager/manager_reset">重置密码</a>
+    <a href="/manager/sales-performance">销售业绩查询</a>
+    <a href="/manager/reports">销售统计报表</a>
+    <a href="/manager/dashboard">大数据</a>
+    <a href="/welcome">退出登录</a>
+</div>
+
+<div class="content">
+    <h1>欢迎管理员</h1>
+    <p>请选择一个功能模块。当前为<strong>重置密码</strong>功能。</p>
+
+    <div class="form-container">
+        <h2>重置销售人员登录口令</h2>
+        <form id="resetPasswordForm" method="post" action="/manager/manager_reset">
+            <div>
+                <label for="sellerId">销售人员ID：</label>
+                <input type="text" id="sellerId" name="sellerId" placeholder="销售人员ID" required>
+            </div>
+            <div>
+                <label for="newPassword">新登录口令：</label>
+                <input type="password" id="newPassword" name="newPassword" placeholder="新登录口令" required>
+            </div>
+            <div>
+                <button type="submit">重置密码</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

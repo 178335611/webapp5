@@ -1,0 +1,74 @@
+@charset "utf-8";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: #999;
+}
+
+a:hover {
+    color: #f8b62b;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    font-size: 100%;
+}
+
+.w {
+    width: 90rem;
+    margin: 0 auto;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.button-container    {
+    font-size: 1.5rem;
+    font-palette: revert;
+    color: deeppink;
+    margin-left: 10px;
+    max-width: 200px;
+    padding: 2px;
+    justify-content: center;
+}
+
+.button {
+    display: inline-block; /* 使链接表现得像块级元素 */
+    padding: 10px 20px; /* 添加内边距 */
+    font-size: 16px; /* 设置字体大小 */
+    color: white; /* 设置文字颜色 */
+    background-color: #007BFF; /* 设置背景颜色 */
+    border: none; /* 移除边框 */
+    border-radius: 5px; /* 添加圆角 */
+    cursor: pointer; /* 鼠标悬停时显示手型 */
+    text-decoration: none; /* 移除链接的下划线 */
+    transition: background-color 0.3s; /* 添加背景颜色的过渡效果 */
+    margin-top: 10px;
+}

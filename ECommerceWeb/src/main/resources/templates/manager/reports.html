@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>销售全局业绩报表</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        #loadingMessage {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #555;
+        }
+        .navbar {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            padding: 20px;
+            background: white;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="/manager/manager_center">销售人员管理</a>
+    <a href="/manager/manager_reset">重置密码</a>
+    <a href="/manager/sales-performance">销售业绩查询</a>
+    <a href="/manager/reports">销售统计报表</a>
+    <a href="/manager/dashboard">大数据</a>
+    <a href="/welcome">退出登录</a>
+</div>
+
+<div class="content">
+    <h1>欢迎管理员</h1>
+    <p>请选择一个功能模块。当前为<strong>销售统计报表</strong>功能。</p>
+
+    <h2>各个商品类别的销售业绩的查询和统计</h2>
+    <table id="ordersTable">
+        <thead>
+        <tr>
+            <th>类别</th>
+            <th>总价值</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- 订单数据将通过 JavaScript 动态填充 -->
+        </tbody>
+    </table>
+    <div id="loadingMessage">正在加载订单数据...</div>
+</div>
+
+<script>
+    // 获取所有 SID 的订单数据
+    async function fetchAllOrders() {
+        try {
+            // 获取所有 SID
+            const response = await fetch('/api/seller_sids');
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            const sids = await response.json();
+
+            // 初始化一个数组来存储所有订单数据
+            const allOrders = [];
+
+            // 遍历每个 SID，获取其订单数据
+            for (const sid of sids) {
+                const ordersResponse = await fetch(`/api/order_list_seller/${sid}`);
+                if (!ordersResponse.ok) {
+                    throw new Error(`Network response was not ok for SID ${sid}: ${ordersResponse.statusText}`);
+                }
+                const orders = await ordersResponse.json();
+                allOrders.push(...orders); // 将当前 SID 的订单数据添加到总数组中
+            }
+
+            // 显示所有订单数据
+            displayOrders(allOrders);
+        } catch (error) {
+            console.error('There has been a problem with your fetch operation:', error);
+        }
+    }
+
+    // 动态显示订单数据
+    function displayOrders(orders) {
+        const tableBody = document.querySelector('#ordersTable tbody');
+        tableBody.innerHTML = ''; // 清空表格内容
+        const categorySummary = {
+            "电子数码": 0,
+            "服装配饰": 0,
+            "家居生活": 0,
+            "食品饮料": 0,
+            "文艺作品": 0,
+            "工具耗材": 0,
+            "其他": 0,
+            "用户已取消": 0,
+            "商家已取消": 0,
+            "用户未付款": 0
+        };
+        orders.forEach(order => {
+            const status = order.status || "else"; // 如果没有状态信息，默认归为“其他”
+            if (status.includes("用户已取消") || status.includes("商家已取消") || status.includes("用户未付款"))
+                categorySummary["其他"] += 0;
+            else {
+                const category = order.good_type || "其他"; // 如果没有类别信息，默认归为“其他”
+                if (categorySummary.hasOwnProperty(category)) {
+                    categorySummary[category] += order.totalprice; // 累加总价值
+                } else {
+                    categorySummary["其他"] += order.totalprice; // 未知类别归为“其他”
+                }
+            }
+        });
+        orders.forEach(order => {
+            const status = order.status || "else"; // 如果没有状态信息，默认归为“其他”
+
+            // 检测状态字符串是否包含特定关键词
+            if (status.includes("用户已取消")) {
+                categorySummary["用户已取消"] += order.totalprice;
+            } else if (status.includes("商家已取消")) {
+                categorySummary["商家已取消"] += order.totalprice;
+            } else if (status.includes("用户未付款")) {
+                categorySummary["用户未付款"] += order.totalprice;
+            } else {
+                categorySummary["其他"] += 0; // 其他情况归为“其他”
+            }
+        });
+        for (const category in categorySummary) {
+            const totalValue = categorySummary[category];
+            if (totalValue > 0) { // 只显示有订单的类别
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                        <td>${category}</td>
+                        <td>${totalValue}</td>
+                    `;
+                tableBody.appendChild(row);
+            }
+
+        }document.getElementById('loadingMessage').style.display = 'none'; // 隐藏加载提示
+    }
+        // 页面加载完成后立即获取所有订单数据
+    window.onload = fetchAllOrders;
+
+</script>
+</body>
+</html>

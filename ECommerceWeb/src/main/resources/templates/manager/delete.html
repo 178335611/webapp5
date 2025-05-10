@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete User</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .form-container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .input-group label {
+            margin-right: 10px;
+        }
+        .input-group input {
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button-link:hover {
+            background-color: #0056b3;
+        }
+        .delete-button {
+            padding: 15px 40px;
+            background-color: #dc3545;
+            font-size: 20px;
+        }
+        .delete-button:hover {
+            background-color: #c82333; /* 悬停时的红色背景色 */
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2>管理员注销</h2>
+    <form action="/manager/delete" method="post" onsubmit="return confirmDelete();">
+        <div class="input-group">
+            <label for="name">管理员名称</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="input-group">
+            <label for="password">管理员密码</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" class="button-link delete-button">删除</button>
+    </form>
+    <p th:text="${message}"></p>
+
+    <!-- 添加跳转到登录页面的按钮 -->
+    <a th:href="@{/manager/login}" class="button-link">管理员登录界面</a>
+
+    <!-- 添加跳转到注册页面的按钮 -->
+    <a th:href="@{/manager/register}" class="button-link">管理员注册界面</a>
+</div>
+
+<script>
+    function confirmDelete() {
+        return confirm("您确定要删除账号吗？此操作不可逆！");
+    }
+</script>
+</body>
+</html>

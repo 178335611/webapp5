@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加订单</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link th:href="@{/css/base.css}" rel="stylesheet">
+</head>
+<body>
+<h2 class="orderadd-title">添加订单</h2>
+<div class="orderadd-container">
+    <form id="order-add-form">
+        <div>
+            <label for="id"></label>
+            <input type="hidden" id="id" name="id" th:value="${id}">
+        </div>
+        <div>
+            <label for="sid"></label>
+            <input type="hidden" id="sid" name="sid" th:value="${good.sid}">
+            <label for="sid1">商家ID</label>
+            <span id="sid1"  th:text="${good.sid}"></span>
+        </div>
+        <div>
+            <label for="gid"></label>
+            <input type="hidden" id="gid" name="gid" th:value="${good.id}">
+            <label for="g1">商品ID</label>
+            <span id="g1"  th:text="${good.id}"></span>
+        </div>
+        <div>
+            <label for="uid"></label>
+            <input type="hidden" id="uid" name="uid"  th:value="${id}">
+            <label for="u1">用户ID</label>
+            <span id="u1"  th:text="${id}"></span>
+        </div>
+        <div>
+            <label for="u2">商品名称</label>
+            <span id="u2"  th:text="${good.name}"></span>
+        </div>
+        <div>
+            <label for="u3">商品类型</label>
+            <span id="u3"  th:text="${good.goodtype}"></span>
+            <label for="goodtype"></label>
+            <input type="hidden" id="goodtype" name="goodtype"  th:value="${good.goodtype}">
+        </div>
+        <div>
+            <label for="sum">数量</label>
+            <input type="number" id="sum" name="sum" th:value="${1}">
+        </div>
+        <div>
+            <label for="unitPrice"></label>
+            <input type="hidden" id="unitPrice" name="unitPrice" th:value="${good.sale*good.price}">
+            <label for="up1">商品单价</label>
+            <span id="up1"  th:text="${good.sale*good.price}"></span>
+        </div>
+        <div>
+            <label for="orderDate"></label>
+            <input type="hidden" id="orderDate" name="orderDate" >
+        </div>
+        <button type="submit" class="button" id="order-add-btn">提交</button>
+        <button type="submit" class="button" id="return-btn">返回</button>
+    </form>
+</div>
+
+<script th:src="@{/js/order_add.js}"></script>
+</body>
+</html>

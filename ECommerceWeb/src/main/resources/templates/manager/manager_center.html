@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理员主页</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        .content {
+            padding: 20px;
+            background: white;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <a href="/manager/manager_center">销售人员管理</a>
+    <a href="/manager/manager_reset">重置密码</a>
+    <a href="/manager/sales-performance">销售业绩查询</a>
+    <a href="/manager/reports">销售统计报表</a>
+    <a href="/manager/dashboard">大数据</a>
+    <a href="/manager/logout">退出登录</a>
+</div>
+
+<div id="content" class="content">
+    <h1>欢迎管理员</h1>
+    <p>请选择一个功能模块。当前为销售人员管理</p>
+
+    <div class="form-container">
+        <h2>添加销售人员</h2>
+        <form id="addSellerForm">
+            <label for="sellerName">销售人员账号:</label>
+            <input type="text" id="sellerName" placeholder="销售人员姓名" required>
+            <label for="sellerPassword">密码:</label>
+            <input type="password" id="sellerPassword" placeholder="登录口令" required>
+            <button type="submit">添加销售人员</button>
+        </form>
+    </div>
+
+    <div>
+        <h2>销售人员列表</h2>
+        <table id="sellersTable">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>账号名</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 销售人员数据将通过 JavaScript 动态插入 -->
+            </tbody>
+        </table>
+    </div>
+    <script th:src="@{/js/manager_center.js}"></script>
+</div>
+</body>
+</html>

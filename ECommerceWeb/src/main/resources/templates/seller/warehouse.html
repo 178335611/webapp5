@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商家后台 - 商品管理</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+</head>
+<body>
+<!-- 导航栏 -->
+<nav class="lk-nav">
+    <div class="w">
+        <div class="lk-nav-left">
+            <a href="#">全部商品分类</a>
+        </div>
+        <div class="lk-nav-right">
+                <ul class="lk-nav-list">
+                    <li><a href="/seller/warehouse">商品管理</a></li>
+                    <li><a href="/seller/order_list">订单管理</a></li>
+                    <li><a href="/seller/logout">退出登录</a></li>
+                    <li><a href="/seller/saleroom">销售状态信息</a></li>
+                </ul>
+
+            <p></p>
+            <p></p>
+            <div class="login-status">
+                <span th:text="'已登录 (用户ID: ' + ${id} + ', 用户类型: ' + ${type} + ')'">未登录</span>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- 添加商品按钮 -->
+<div class="button-container custom-button-container">
+    <a th:href="@{/seller/warehouse/goodsadd}" class="button-link custom-button"
+        style="color:deeppink;"> 添加商品</a>
+</div>
+<!-- 商品列表 -->
+<section class="lk-main-content">
+    <div class="w">
+        <h2 style="color:deeppink;">商品列表</h2>
+        <div class="lk-goods-list" id="goods-list">
+            <!-- 商品项将通过JavaScript动态插入 -->
+        </div>
+    </div>
+</section>
+
+
+
+<script th:src="@{/js/warehouse.js}"></script>
+<!--在js前面加个static就不行，删掉就能正常加载了，但没有看到什么不同-->
+</body>
+</html>
